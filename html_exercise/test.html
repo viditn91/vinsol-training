@@ -13,16 +13,16 @@
 		<form method="post" action onsubmit >
 
 			<table>
-			<tr><td>Your Name*:</td><td><input type="text" name="name1" autofocus /></td><tr>
+			<tr><td>Your Name*:</td><td><input type="text" name="name1" autofocus required/></td><tr>
 		
-			<tr><td>E-Mail*:</td><td><input type="email" name="emai1" style="background-color:yellow"</td><tr>
+			<tr><td>E-Mail*:</td><td><input type="email" name="emai1" style="background-color:yellow" required</td><tr>
 
 			<tr><td>Phone number:</td><td><input type="numeric" name="number1" style="background-color:yellow"</td><tr>
 
-			<tr><td>Website*: </td><td><input type="url" name="url1" value="http://"/></td><tr> </table></br>
+			<tr><td>Website*: </td><td><input type="url" name="url1" value="http://" required/></td><tr> </table></br>
 
 			<p>Comments*:</p>
-			<p> <textarea name="textarea1" rows="7" cols="60"></textarea> </p></br>
+			<p> <textarea name="textarea1" rows="7" cols="60" required></textarea> </p></br>
 
 			<h4>Text Field</h4>		
 			<p>Your name:<input type="text" name="name2" style="background-color:yellow"/></p></br>
