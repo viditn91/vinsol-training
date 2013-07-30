@@ -1,0 +1,97 @@
+
+   a:link, a:visited, a:hover
+{
+  text-decoration: none;
+}
+
+ul,li,a
+{ 
+  margin-left: 0px;
+  padding-left: 0px;
+  font-family: 'Georgia';
+  font-style: italic;
+  color: black;
+}
+
+ul {
+  
+    list-style-type: none; display:inline-block; border-bottom: solid 0px black; height:auto; 
+    
+}
+li {  
+       display: inline-block;
+       
+      }
+
+li a 
+{
+  display: inline-block;
+  position: static;
+  background-color: #cfcfcf;
+  border-bottom: solid 1px black;
+  height: 30px;
+  padding-top: 7px;
+  margin-left: 2px; 
+  padding-left: 20px;
+  padding-right: 20px;
+}
+     
+ul:first-child {
+                margin-left: 0px;
+                }
+
+ul li ul { 
+           display: none;
+           padding-top:5px;
+           padding-bottom: 5px;
+           padding-left: 5px;
+           margin-top: 0px;
+           margin-left: 2px;
+           width: 200px;
+           border-right: solid 1px black;
+           border-bottom: solid 1px black;
+           border-left: solid 1px black;
+           }
+
+ul li ul li
+{
+width: 180px;
+ border-bottom: solid 1px black;
+}
+
+ul li ul li:last-child
+{
+  border-bottom: none;
+}
+
+li:hover a{ 
+            background-color: white;
+            height: 29px;
+            padding-top: 5px;
+            padding-left: 19px;
+            padding-right: 19px;
+            margin-bottom: 0px;
+            border-top: solid 1px black;
+            border-right:solid 1px black;
+            border-left: solid 1px black;
+            border-bottom: solid 1px white;
+            color:grey;
+            }
+
+li:hover li a {
+            background-color: white;
+             font-size: 14px;
+            border: none;
+            }
+
+
+#first{
+  margin-left: 0px;
+}
+
+li:hover li a {color: black;}
+li li:hover a {color: #bd0707;}
+
+ul li:hover ul {  display: block;
+                  position: absolute;
+                }

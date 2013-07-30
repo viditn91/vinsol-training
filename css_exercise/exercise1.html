@@ -4,109 +4,53 @@
   <head>
     <meta charset="UTF-8"/>
     <title>EXERCISE1</title>
+     <link rel="stylesheet" type="text/css" href="css_ex1.css">
   </head>
   
-  <style>
-
-    ul,li {
-      margin-left: 0px; padding-left: 0px;
-    }
-    a{
-      text-decoration:none;
-    }
-    ul{
-      list-style-type: none; display:inline;
-    }
-    ul li{
-      display:inline; position: relative; 
-    }
-    ul li a{
-      color: black; font-family: georgia; font-style: italic;font-size: 18px; 
-      background-color: #CFCFCF;padding-left: 20px; padding-right: 20px;margin-left: 2px; height: 37px;
-      width:100%; border-bottom: solid 1px #6d6d6d; 
-    }
-    ul li ul{
-      display:none; width: 200px;background-color: white;border: solid 1px #6d6d6d;
-      padding: 10px;margin-left: 2px; margin-top: 0px;
-    }
-    
-    ul li ul li{
-      display: block;
-    }
-    ul li:hover ul li a{
-      display: block;font-family: georgia; font-style: italic; font-size: 14px;
-      color: black; background-color: white; padding-top: 5px; padding-bottom: 5px;
-      border-bottom: solid 1px #CFCFCF; padding-left: 0px;padding-right: 0px;
-      height: auto; border-top: 0px;border-left: 0px;border-right: 0px;
-    }
-    ul li:hover ul, ul li ul:hover{
-      display:block;
-      position: absolute;
-    }
-    ul li:hover a{text-decoration: none; color: black; font-family: georgia; color: #8c8c8c;
-      font-style: italic; font-size: 18px; background-color: white; padding-left: 20px; padding-right: 20px;
-      margin-left: 2px; height: 37px; border-bottom: solid 1px white; border-top: solid 1px #6d6d6d; 
-      border-left: solid 1px #6d6d6d;border-right: solid 1px #6d6d6d;
-    }
-
-    ul li:hover ul li a:hover{ color:#bd0707;}
-    
-    #last{
-      border-bottom: none;
-    }
-    #link1 a{
-      margin-left: 0px;
-    }
-    ul #first{
-      margin-left: 0px;
-    }
-
-  </style>
-
   
   <body>
   
     <h1>Examples of CSS based Drop-downs</h1></br>
   
     <ul>
-      <li id="link1" ><a href="home">Home</a>
+      <li><a id="first" href="home.htm">Home</a>
         <ul id="first">
           <li><a href="Example1">Example link 1</a></li>
           <li><a href="Example2">Example link 2</a></li>
           <li><a href="Example3">Example link 3</a></li>
-          <li><a id="last" href="Example4">Example link 4</a></li>
+          <li><a href="Example4">Example link 4</a></li>
         </ul></li>
 
-      <li><a href="aboutus" >About Us</a>
+      <li><a href="aboutus.htm" >About Us</a>
         <ul>
           <li><a href="Example1">Example link 1</a></li>
           <li><a href="Example2">Example link 2</a></li>
           <li><a href="Example3">Example link 3</a></li>
-          <li><a id="last"  href="Example4">Example link 4</a></li>
+          <li><a href="Example4">Example link 4</a></li>
         </ul></li>
           
-      <li><a href="ourservices">Our Services</a>
+      <li><a href="ourservices.htm">Our Services</a>
         <ul>
           <li><a href="Example1">Example link 1</a></li>
           <li><a href="Example2">Example link 2</a></li>
           <li><a href="Example3">Example link 3</a></li>
-          <li><a id="last"  href="Example4">Example link 4</a></li>
+          <li><a href="Example4">Example link 4</a></li>
         </ul></li>
 
-      <li><a href="ourportfolio">Our Portfolio</a>
+      <li><a href="ourportfolio.htm">Our Portfolio</a>
         <ul>
           <li><a href="Example1">Example link 1</a></li>
           <li><a href="Example2">Example link 2</a></li>
           <li><a href="Example3">Example link 3</a></li>
-          <li><a id="last"  href="Example4">Example link 4</a></li>
+          <li><a href="Example4">Example link 4</a></li>
         </ul></li>
 
-      <li><a href="contactus">Contact Us</a>
+      <li><a href="contactus.htm">Contact Us</a>
         <ul>
           <li><a href="Example1">Example link 1</a></li>
           <li><a href="Example2">Example link 2</a></li>
           <li><a href="Example3">Example link 3</a></li>
-          <li><a id="last"  href="Example4">Example link 4</a></li>
+          <li><a href="Example4">Example link 4</a></li>
         </ul></li>
 
     </ul>
