@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8"/>
+    <title>EXERCISE3</title>
+     <link rel="stylesheet" type="text/css" href="css_ex3.css">
+  </head>
+    
+  <body>
+    <div id="image">
+      <img src="vinsol-logo.png">
+        <span>Skype: <a href="#">Vinsol</a></span>
+        <span>Email us at: <a href="#">sales@vinsol.com</a></span>
+    </div>  
+    <div id="heading">Please fill the form below</div>
+  <form method:post action onsubmit>
+    <table>
+      <colgroup>
+        <col></col>
+        <col class="col2"></col>
+      <tr>
+        <td class="col1"><label for="first-name">First Name</label></td>
+        <td><input type="text" name="first-name" autofocus></td>
+      </tr>
+      <tr>
+        <td class="col1"><label for="last-name">Last Name</label></td>
+        <td><input type="text" name="last-name"></td>
+      </tr>
+      <tr>
+        <td class="col1"><label for="email">Email Address</label></td>
+        <td><input type="email" name="email"></td>
+      </tr>
+      <tr>
+        <td class="col1"><label for="password">Password</label></td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr>
+        <td class="col1"><label for="gender">Gender</label></td>
+        <td id="radio">
+          <input id="radio" type="radio" name="radio1" value="male">Male
+          <input id="radio" type="radio" name="radio1" value="male">Female
+        </td>
+      </tr>
+      <tr>
+        <td class="col1"><label for="dob">Date Of Birth</label></td>
+        <td>
+          <div>
+            <select name="date">
+              <option value="" disabled selected>DD</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <select name="month">
+              <option value="" disabled selected>MM</option>
+              <option value="jan">Jan</option>
+              <option value="feb">Feb</option>
+              <option value="march">March</option>
+              <option value="april">April</option>
+            </select>
+            <select name="year">
+              <option value="" disabled selected>YYYY</option>
+              <option value="1990">1990</option>
+              <option value="1991">1991</option>
+              <option value="1992">1992</option>
+              <option value="1993">1993</option>
+              <option value="1994">1994</option>
+            </select> 
+          </div>  
+        </td>
+      </tr>
+      <tr>
+        <td  style="padding-bottom:120px" class="col1"><label for="address">Address</label></td>
+        <td> <textarea> </textarea></td>
+      </tr>
+      <tr>
+        <td class="col1"></td>
+        <td><input type="submit" name="submit1" value="Submit Details"></td>
+      </tr>
+      </table> 
+      
+    </div>
+  </body>
+</html>  
+      

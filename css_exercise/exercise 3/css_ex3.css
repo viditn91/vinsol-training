@@ -1,0 +1,67 @@
+
+span{
+float:right;
+font-family: tohoma; font-size: 13px;
+	color: black; text-align: right;padding-top: 55px;margin-left: 30px;
+}
+
+#image{
+	border-bottom: solid 2px #db2927; padding-bottom: 5px;
+
+}
+
+#heading{
+   font-family: tahoma;font-size:18px ;color:#2c286d ;margin-left: 300px;margin-top: 30px;
+}
+
+form{
+	background-color:#ececec ;border: solid 1px #bcbcbc ;width:500px; ;padding-top:20px ;padding-bottom:20px;
+	padding-left: 25px;padding-right: 25px; margin-left: 300px;
+
+}
+
+label{
+	font-family: tahoma;font-size: 14px;color: black; margin-top:0; 
+}
+
+input[type=text],input[type=password],input[type=email] {
+	background-color: white; border-color: #b9b9b9; width:360px; height:25px; border-style: double;
+}
+#radio{
+	font-family: tahoma; font-size: 13px; color: #6f6f6f;
+}
+
+input[type=radio]:first-child{
+	height: 12px; margin-left: 0px;
+}
+
+input[type=radio]{
+	height: 12px; margin-left: 25px;
+}
+
+select{
+	width: 110px;font-size: 13px;color: #6f6f6f;font-family: tahoma;
+}
+
+
+textarea{
+	width: 360px;height: 135px;border-style: double;border:solid 2px #b9b9b9;
+}
+
+.col1{
+	text-align: right;
+	padding-right: 20px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+input[type=submit]{
+	background-color: #dc2927; border-color: #a10200; width: 130px;height: 32px;text-align:center ;font-family:tahoma ;
+	font-size:14px ;color: white;
+}
+
+a{
+	text-decoration: none;
+}
