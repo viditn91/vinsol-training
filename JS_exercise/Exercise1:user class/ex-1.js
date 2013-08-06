@@ -1,19 +1,22 @@
-
-function user(name1,age){
-  this.name1=name1;
-  this.age=age;
+//defining class
+function User(name,age){
+  this.name = name;
+  this.age = age;
 }
-user.prototype.compare=function(user){
-  if (this.age>user.age) {
-    alert(this.name1+" is older than "+user.name1);
+//method to compare age
+User.prototype.compare = function(User){
+  if (this.age > User.age) {
+    alert(this.name + " is older than " + User.name);
   }
-  else if (user.age>this.age){
-    alert(user.name1+" is older than "+this.name1);
+  else if (User.age > this.age){
+    alert(User.name + " is older than " + this.name);
   }
   else{
-    alert("both "+this.name1+" and "+user.name1+" are of same age" );
+    alert("both " + this.name + " and " + User.name + " are of same age");
   }
 }
-var user1= new user("john","14");
-var user2= new user("mary","16");
+//initializing objects
+var user1 = new User("john",14);
+var user2 = new User("mary",16);
+//calling the method
 console.log(user1.compare(user2));
