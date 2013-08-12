@@ -1,0 +1,29 @@
+div{
+	border: solid 2px grey;
+	width: 800px;
+	padding: 20px;
+	background-color: lightgrey;
+	margin: auto;
+}
+select {
+	width: 300px;
+}
+
+#selectBox1 {
+	float:left;
+
+}
+#selectBox2 {
+	margin-left: -50px;
+}
+#add {
+	float: left;
+	position: relative;
+	left: 20px;
+	width:100px;
+}
+#remove{
+	position: relative;
+	left:-80px;
+	width: 100px;
+}
