@@ -13,7 +13,7 @@ function checkForMax3(obj) {
       obj.checked = false;
       var store = [];
       for (var i = 0; i < days.length; i++) {
-        if(days[i].checked == true) {
+        if(days[i].checked) {
           store.push(days[i].id);
         }
       }
@@ -27,8 +27,8 @@ function checkForMax3(obj) {
 }
 // checkNone(value) is called when NONE is cheked to uncheck all other checkboxes. 
 function checkNone(value) {
-    for (var i = 0; i < days.length; i++) {
-      days[i].checked = value;
-    }
-    counter = 0;
+  for (var i = 0; i < days.length; i++) {
+    days[i].checked = value;
+  }
+  counter = 0;
 }
