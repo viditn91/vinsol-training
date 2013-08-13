@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>
+      FORM VALIDATION
+    </title>
+    <link rel="stylesheet" type="text/css" href="form-validation.css">
+  
+  </head>
+  <body>
+  	<form id="formBox" action="register" method="post">
+      <table>
+        <caption>Registration form</caption>
+        <tr>
+          <td><label for="login-id">Login Id</label></td>
+          <td><input class="inputValue" type="text" name="login-id" autofocus></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email</label></td>
+          <td><input id = "email" class="inputValue" type="text" name="email"></td>
+        </tr>
+        <tr>
+          <td><label for="name">Name</label></td>
+          <td><input class="inputValue" type="text" name="name"></td>
+        </tr>
+        <tr>
+          <td><label for="timezone">Time Zone</label></td>
+          <td>
+            <select>
+              <option>GMT</option>
+              <option>XYZ</option>
+              <option>ABC</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="home-page">Home Page</label></td>
+          <td><input id = "url" class = "inputValue" type="text" name="home-page"></td>
+        </tr>
+        <tr>
+          <td><label for="about-me">About Me</label></td>
+        </tr>
+      </table>
+      <textarea id="textarea"></textarea>
+      <input id="checkbox" type="checkbox" name="checkbox">
+      <label for="checkbox"><span>Receive notification of comments<span></label>
+      <p class = "p1">You will be sent an email when someone posts comments on your blog or album.</p>
+      <p class = "p2">Your password will be mailed to you</p>  
+      <p class = "button"><input name="submit" type="submit" value="GO"></p>
+    </form>
+
+
+  </body>
+  <script type="text/javascript" src="form-validation.js"></script>
+</html>
