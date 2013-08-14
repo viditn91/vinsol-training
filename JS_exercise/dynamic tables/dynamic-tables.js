@@ -25,7 +25,7 @@ function createColumns(rowId,row,name,email) {
     input.type = type[i];
     input.id = "input"+ i + rowId;
     input.value = value[i];
-    if (i == 2) {
+    if (input.type == "button") {
       input.setAttribute("onClick","saveValue('" + rowId + "')");
     }
     cell[i].appendChild(input);
@@ -34,10 +34,9 @@ function createColumns(rowId,row,name,email) {
 //function to save the entered values
 function saveValue(rowId) {
   for (var i = 0; i < colNum; i++) {
-    var row = document.getElementById(rowId);
     var cell = document.getElementById("cell" + i + rowId);
     var input = document.getElementById("input" + i + rowId);
-    if (i != 2) {
+    if (input.type != "button") {
       var inputValue = input.value;
       cell.removeChild(input);
       cell.appendChild(document.createTextNode(inputValue));
