@@ -1,19 +1,18 @@
 function displayList(obj) {
-  var outerList = obj.parentNode;
-  var ul = outerList.getElementsByTagName('ul')[0];
-  var li = ul.getElementsByTagName('li');
-  if(obj.checked == true) {
+  var outerList = document.getElementById(obj.name + "Outer");
+  var innerList = document.getElementById(obj.name + "Inner");
+  var innerListContent = innerList.getElementsByClassName('inner');
+  if(obj.checked) {
     action('block',true);
   }else {
     action('none',false);
   }
-  function action(displayType,value)
+function action(displayType,value)
   {
-    ul.style.display = displayType;
+    innerList.style.display = displayType;
     outerList.scrollIntoView(true);
-    for (var i = 0; i < li.length; i++) {
-      var innerBox = li[i].getElementsByTagName('input');
-      innerBox[0].checked = value; 
+    for (var i = 0; i < innerListContent.length; i++) {
+      innerListContent[i].checked = value; 
     }
   }
 }
