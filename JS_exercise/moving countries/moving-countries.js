@@ -1,17 +1,17 @@
 var data = {
-  selectBox1: document.getElementById('selectBox1'),
-  selectBox2: document.getElementById('selectBox2'),
-  buttonAdd: document.getElementById('add'),
+  selectBox1:   document.getElementById('selectBox1'),
+  selectBox2:   document.getElementById('selectBox2'),
+  buttonAdd:    document.getElementById('add'),
   buttonRemove: document.getElementById('remove'),
 };
 
-data.buttonAdd.addEventListener("click",addCountry);
-data.buttonRemove.addEventListener("click",removeCountry);
+data.buttonAdd.addEventListener("click",moveCountry);
+data.buttonRemove.addEventListener("click",moveCountry);
 
-function addCountry(){
-  selectBox2.appendChild(selectBox1.options[selectBox1.selectedIndex]);
-}
-
-function removeCountry(){
-  selectBox1.appendChild(selectBox2.options[selectBox2.selectedIndex]);
+function moveCountry(e){
+	if(e.target.id == "add") {
+		selectBox2.appendChild(selectBox1.options[selectBox1.selectedIndex]);
+	} else {
+		selectBox1.appendChild(selectBox2.options[selectBox2.selectedIndex]);
+	}
 }
