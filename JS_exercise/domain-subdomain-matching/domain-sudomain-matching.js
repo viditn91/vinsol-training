@@ -1,24 +1,24 @@
 //constructor funtion or class
-function formData(formId){
+function Match(formId){
   this.formBox = document.getElementById(formId);
   this.urlField = document.getElementById('url');
-  this.formBox.addEventListener("submit", this.checkUrl);
+  this.formBox.addEventListener("submit", this.extract);
 }
-//method of the class to check the url for Domain/ Subdomain
-formData.prototype.checkUrl = function(e) {
-  var regExp = /^((https?|ftp|file)\:\/\/)?(www\.)?((\w+)(\.))?((\w+)\.([a-z]{2,4}))\/?(\w+\?\=\#\$\^)?/i;
-  if(regExp.test(newForm.urlField.value)) {
-    var domain = RegExp.$8;
-    var subdomain = RegExp.$5;
+//method of the class to extract the Domain/ Subdomain from URL
+Match.prototype.extract = function(e) {
+  var pattern = /(www\.)?((\w+)(\.))?((\w+)\.([a-z]{2,4}))/i;
+  if(pattern.test(newForm.urlField.value)) {
+    var domain = RegExp.$5;
+    var subdomain = RegExp.$3;
     if (!subdomain) {
-      alert("Domain: "+domain+".com");
+      alert("DOMAIN: "+domain);
     }else{
-      alert("Domain: "+domain+".com and Subdomain:"+subdomain);
+      alert("DOMAIN: "+domain+" and SUBDOMAIN:"+subdomain);
     }
   }else{
-    alert("invalid url");
+    alert("invalid URL");
     e.preventDefault();
   }
 }
 //creating new object newForm
-var newForm = new formData('formBox');
+var newForm = new Match('formBox');
