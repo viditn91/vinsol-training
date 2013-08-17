@@ -1,0 +1,28 @@
+#userInput {
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+
+}
+
+#content {
+  font-size: 50px;
+}
+
+footer {
+  font-size: 20px;
+    position: relative;
+  margin-top: 500px;
+}
+
+table {
+  display:none;
+  margin-left: 100px;
+  border : solid 1px black;
+  border-collapse: collapse;
+}
+
+th,td {
+  border: solid 1px black;
+  padding: 10px;
+}
