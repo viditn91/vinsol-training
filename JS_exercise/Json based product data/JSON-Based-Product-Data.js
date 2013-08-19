@@ -36,15 +36,11 @@ ProductData.prototype.sortIt = function () {
       return parseInt(b[key]) < parseInt(a[key]) ?  1 : parseInt(b[key]) > parseInt(a[key]) ? -1 : 0;
     });
   }
+  this.removeGrid();
   this.displayGrid();
 }
 //Class method to display the images of the sorted JSON Object
 ProductData.prototype.displayGrid = function () {
-  if(this.container.childNodes.length > 1){
-    for (var i = 0; i < this.sorted.length; i++) {
-      this.container.removeChild(this.container.lastChild);
-    }
-  }
   for (i = 0; i < this.sorted.length; i++) {
     var img = document.createElement('img');
     img.src = this.sorted[i]["url"];
@@ -53,6 +49,13 @@ ProductData.prototype.displayGrid = function () {
     img.style.margin = "1px";
     this.container.appendChild(img);
   }
+}
+//Class method to remove the images from the present screen
+ProductData.prototype.removeGrid = function () {
+  document.body.removeChild(this.container);
+  this.container = document.createElement('div');
+  this.container.id = "container"; 
+  document.body.appendChild(this.container);  
 }
 //Creating an instance of Class
 var element = new ProductData();
