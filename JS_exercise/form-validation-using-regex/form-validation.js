@@ -1,3 +1,6 @@
+var regexEmail = /^[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g,
+    regexUrl   = /^((https?|ftp|file)\:\/\/)?(www\.)?((\w+)(\.))?((\w+)\.([a-z]{2,4}))\/?(\w+\?\=\#\$\^)?/i;
+
 //constructor function or class
 function checkFormValidation(formId){
   this.formToValidate = document.getElementById(formId);
@@ -7,28 +10,31 @@ function checkFormValidation(formId){
   this.email          = document.getElementById('email');
   this.url            = document.getElementById('url');
   this.formToValidate.addEventListener("submit",this.checkInput);
-  this.regexEmail     = /^[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;
-  this.regexUrl       = /^((https?|ftp|file)\:\/\/)?(www\.)?((\w+)(\.))?((\w+)\.([a-z]{2,4}))\/?(\w+\?\=\#\$\^)?/i;
 }
 //method of the class to validate the form fields
 checkFormValidation.prototype.checkInput = function(e) {
   var flag = true;
-  //checking the four input fields for empty value
+  var msg  = "";
+  //checking the input fields for empty value
   for( var i = 0; i < newForm.inputFields.length; i++){
-    if (!newForm.inputFields[i].value || !newForm.inputFields[i].value.trim()){
-      alert(newForm.inputFields[i].name+" cannot be empty");
+    if (!newForm.inputFields[i].value.trim()){
+      msg += newForm.inputFields[i].name+" cannot be empty\n"
       e.preventDefault();
       flag = false;
-      break;
     }   
+  }
+  //alerting all the empty fields at once
+  if (!flag) {
+    alert(msg);
+    e.preventDefault();
   }
   //checking regular expressions pattern over email and url field 
   if (flag){
-    if(!newForm.regexEmail.test(newForm.email.value)){
+    if(!regexEmail.test(newForm.email.value)) {
       alert("email address not valid");
       flag = 0;
       e.preventDefault();
-    }else if(!newForm.regexUrl.test(newForm.url.value)){
+    } else if(!regexUrl.test(newForm.url.value)) {
       alert("Home Page URL is not valid");
       flag = 0;
       e.preventDefault();
@@ -40,21 +46,13 @@ checkFormValidation.prototype.checkInput = function(e) {
     e.preventDefault();
   }
   //checking the notification checkBox if checked 
-  else if(flag && newForm.checkBox.checked) {
-    alert("you will receive notification");
-    var confirmation = confirm("form is valid. . . submitting");
+  else if(flag) {
+    var value = newForm.checkBox.checked == 1 ? " " : " not ";
+    var confirmation = confirm("you will" + value + "receive notification");
     if (!confirmation){
       e.preventDefault();
     }
   }
-  //checking the notification checkBox if unchecked 
-  else if(flag && !newForm.checkBox.checked) {
-    alert("you will not receive notification");
-    var confirmation = confirm("form is valid. . . submitting");
-    if (!confirmation) {
-      e.preventDefault();
-    }
-  } 
 }
 //creating new object newForm
 var newForm = new checkFormValidation("formBox");
