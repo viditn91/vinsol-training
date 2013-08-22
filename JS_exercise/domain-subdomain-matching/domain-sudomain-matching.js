@@ -6,10 +6,10 @@ function Match(formId){
 }
 //method of the class to extract the Domain/ Subdomain from URL
 Match.prototype.extract = function(e) {
-  var pattern = /^(?:(?:https?|ftp|file)\:\/\/)?(?:www\.)?((\w+)\.)?(\w+\.[a-z]{2,4})\/?(?:\w+\?\=\#\$\^)?/i;
+  var pattern = /^(?:(?:https?|ftp|file)\:\/\/)?(?:www\.)?(?:([\w\.-]+)\.)?(\w+\.[a-z]{2,4})(?:(?:[\/\w \.-]*)*\/?)?$/i;
   if(pattern.test(newForm.urlField.value)) {
-    var domain = RegExp.$3;
-    var subdomain = RegExp.$2;
+    var domain = RegExp.$2;
+    var subdomain = RegExp.$1;
     if (!subdomain) {
       alert("DOMAIN: "+domain);
     }else{
