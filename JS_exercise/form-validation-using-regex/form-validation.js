@@ -1,4 +1,4 @@
-var regexEmail = /^[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g,
+var regexEmail = /^[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
     regexUrl   = /^((https?|ftp|file)\:\/\/)?(www\.)?((\w+)(\.))?((\w+)\.([a-z]{2,4}))\/?(\w+\?\=\#\$\^)?/i;
 
 //constructor function or class
