@@ -36,27 +36,34 @@ ProductData.prototype.sortIt = function () {
       return parseInt(b[key]) < parseInt(a[key]) ?  1 : parseInt(b[key]) > parseInt(a[key]) ? -1 : 0;
     });
   }
-  this.removeGrid();
+  this.hideGrid();
   this.displayGrid();
 }
 //Class method to display the images of the sorted JSON Object
 ProductData.prototype.displayGrid = function () {
-  for (i = 0; i < this.sorted.length; i++) {
+  for (var i = 0; i < this.sorted.length; i++) {
     var img = document.createElement('img');
     img.src = this.sorted[i]["url"];
-    img.style.height = "100px";
-    img.style.width = "100px";
-    img.style.margin = "1px";
+    img.className = "show";
     this.container.appendChild(img);
   }
 }
-//Class method to remove the images from the present screen
-ProductData.prototype.removeGrid = function () {
-  document.body.removeChild(this.container);
-  this.container = document.createElement('div');
-  this.container.id = "container"; 
-  document.body.appendChild(this.container);  
+//Class method to hide the images from the present screen
+ProductData.prototype.hideGrid = function () {
+  if(this.container.getElementsByClassName('show')) {
+    var imgElement = this.container.getElementsByClassName('show');
+    for (var i = imgElement.length-1; i >= 0; i--) {
+      imgElement[i].className = "unshow";
+    }
+  }
 }
+//This is the best method as the images are not removed which leaves the DOM unaffected
+//thereby cutting down the processing. 
+//If memoryspace is a restriction, then we can use the following methods two methods-
+//1. Using .innerHTML = "" to remove all the elements inside 'container' div
+//2. Using removeChild() method to remove all the childNodes of the 'container' div 
+
+
 //Creating an instance of Class
 var element = new ProductData();
 //Calling the sortIt method
