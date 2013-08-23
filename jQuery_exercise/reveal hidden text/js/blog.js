@@ -6,12 +6,10 @@ $('#blog h2').bind({
 });
 //Clicking on another headline slides down its excerpt paragraph, and slide up any other 
 //currently showing excerpt paragraphs.
-$('#blog a').each(function (index) {
-  $(this).bind({
-    'click' : function(e) {
-      e.preventDefault();
-      $(this).closest('li').find('p.excerpt').slideDown();
-      $(this).closest('li').siblings().find('p.excerpt').slideUp();      
-    }
-  });
+$('#blog a').bind({
+  'click' : function(e) {
+    e.preventDefault();
+    $(this).closest('li').find('p.excerpt').slideDown();
+    $(this).closest('li').siblings().find('p.excerpt').slideUp();
+  }
 });
