@@ -59,7 +59,7 @@ ProductData.prototype.hideGrid = function () {
 }
 //This is the best method as the images are not removed which leaves the DOM unaffected
 //thereby cutting down the processing. 
-//If memoryspace is a restriction, then we can use the following methods two methods-
+//If memoryspace is a restriction, then we can use the following methods-
 //1. Using .innerHTML = "" to remove all the elements inside 'container' div
 //2. Using removeChild() method to remove all the childNodes of the 'container' div 
 
