@@ -13,7 +13,9 @@ $labelElement.remove();
 // text was entered
 $inputElement.bind({
   'focus': function() {
-    $(this).val("").removeClass('hint');
+    if($(this).val() == $labelValue) {
+      $(this).val("").removeClass('hint');
+    }
   },
   'blur' : function() { 
     if($(this).val() == "") {
