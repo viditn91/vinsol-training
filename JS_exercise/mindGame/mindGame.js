@@ -26,7 +26,7 @@ function MindGame() {
   this.button   = document.getElementById('start');
   this.delay = 2000;  
   this.button.addEventListener("click", this.displayGrid.bind(this));
-  this.table.addEventListener("click", target);
+  this.table.addEventListener("click", setTargetClass);
 }
 //Class method to generate a random number
 MindGame.prototype.generateRandomNumber = function(max, min) {
@@ -72,36 +72,30 @@ MindGame.prototype.createCellElements = function() {
   }
 }
 //handler function for the click event
-var target = function(e) {
-  var img = e.target.childNodes[0];
-  img.className = "clicked";
-  scope.matchImages();
+var setTargetClass = function(e) {
+  var targetImage    = e.target.childNodes[0];
+  var clickedImages = document.getElementsByClassName('clicked');
+  if(clickedImages.length <= 1){
+    targetImage.className = "clicked";
+    scope.matchImages(clickedImages);
+  } else {
+    targetImage.className = "unclicked";
+  }
 };
 //method to match the two clicked images
-MindGame.prototype.matchImages = function () {
-  var img = document.getElementsByClassName('clicked');
-  if (img.length == 1) {
-    img[0].style.display = "block";
-  }else if(img.length == 2) {
-    var img1 = img[0];
-    var img2 = img[1];
-    img1.style.display = "block";
-    img2.style.display = "block";
-    if(img1.id == img2.id){
-      img1.className = "match";
-      img2.className = "unclicked";
+MindGame.prototype.matchImages = function (img) {
+  if(img.length == 2) {
+    if(img[0].id == img[1].id){
+      img[0].className = "match";
+      img[0].className = "match";
     }else {
-      this.incorrectMatch(img1,img2);
+      this.incorrectMatch(img[0],img[1]);
     }
-  }else {
-      img[2].className = "unclicked";
   }
 }
 //method to give a time delay when incorrect match is found
 MindGame.prototype.incorrectMatch = function(img1,img2) {
   var timerId = setTimeout(function(){
-    img1.style.display = "none";
-    img2.style.display = "none";
     img1.className = "unclicked";
     img2.className = "unclicked";
   }, this.delay);
@@ -109,7 +103,7 @@ MindGame.prototype.incorrectMatch = function(img1,img2) {
 
 MindGame.prototype.updateScore = function() {
   var img = document.getElementsByClassName('match');
-  return img.length;
+  return (img.length/2);
 }
 
 MindGame.prototype.finalResult = function() {
