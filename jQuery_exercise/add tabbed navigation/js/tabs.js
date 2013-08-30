@@ -15,10 +15,9 @@ $('#newList li').each(
   function (index) {
     $(this).bind({
       'click' : function() {
-        $('.module').css({'display' : 'none'});
-        $('.module')[index].style.display = "block";
-        $('#newList li').removeClass('current');
-        $(this).addClass('current');
+        $('.module').hide();
+        $('.module').eq(index).show();
+        $(this).addClass('current').siblings().removeClass('current');
       }
   }); 
 });
