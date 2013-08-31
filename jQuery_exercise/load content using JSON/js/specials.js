@@ -8,12 +8,6 @@ function JSONAjax() {
     dataType : 'json',
     success  : function (json){
       data = json;
-    },
-    error : function(xhr, status) {
-      alert('could not load json!');
-    },
-    complete : function(xhr, status) {
-      alert('The request is complete!');
     }
   }); 
   return data;  
@@ -21,26 +15,34 @@ function JSONAjax() {
 
 $(document).ready(function() {
   //variable to store the JSON
-  var jsonData = JSONAjax();
-
+  var jsonData = "";
   $('#specials form').after('<div id = "target" ></div>')
                    .find('select[name=day]')
-                   //binding the change event
+                   //loading the JSON when change is made
+                   //this is done only once i.e. when the first change is made
+                   .one({
+                    'change' : function () {
+                      jsonData = JSONAjax();
+                    }
+                   })
+                   //binding change event for every change
                    .bind({
-                    'change' : function (e) {
+                    'change' : function () {
                       $('#target').empty();
                       selectedOption = $(this).val();
                       if(!selectedOption) {
                         $('#target').html('');
                       } else {
                         $('#target').html(jsonData[selectedOption]['title']
-                                    + '</br>' + jsonData[selectedOption]['text']);
+                                    + '</br>' + jsonData[selectedOption]['text']
+                                    + '</br><img src = "' +jsonData[selectedOption]['image']
+                                    + '">');
                       }
                     }
-                  })
+                   })
                   //removing the button
                   .end()
                   .find('li.buttons')
                   .remove();                   
-});
+}); 
 
