@@ -15,9 +15,5 @@ ul {
 	background-color: white;
 	border: solid 1px black;
 	padding-left: 10px;
-}
-
-.list:last-child {
-	position: relative;
-	left: 100px;
+	margin-left: 50px;
 }
