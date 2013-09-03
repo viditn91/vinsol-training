@@ -1,0 +1,23 @@
+div{
+	border: solid 2px grey;
+	width: 700px;
+	padding: 20px;
+	background-color: lightgrey;
+	margin: auto;
+}
+
+ul {
+	display: inline-block;
+	list-style-type: none;
+	width: 250px;
+	height: 100px;
+	overflow: scroll;
+	background-color: white;
+	border: solid 1px black;
+	padding-left: 10px;
+}
+
+.list:last-child {
+	position: relative;
+	left: 100px;
+}
