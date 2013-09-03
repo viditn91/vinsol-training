@@ -1,18 +1,21 @@
 $(function() {
-  var $element = "";
-  var target = "";
   $('.drag').draggable({
     helper : 'clone',
     revert : 'invalid',
     zIndex : 100,
     drag: function (event,ui) {
-      $element = event.target;
-      target = $($element).closest('ul')[0];
+      var $element = event.target;
+      var index = $($element).closest('ul')[0].id;
+      index = index == 1 ? 2 : 1;
+      move(index, $element);
     }
   });
-  $('.list').droppable({
-    drop: function() {
-      $(this).append($element);
-    }
-  });
+  function move (index, element) {
+    index = '#'+index;
+    $(index).droppable({
+      drop: function() {
+        $(this).append(element);
+      }
+    });
+  }
 });
