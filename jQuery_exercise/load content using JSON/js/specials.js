@@ -20,29 +20,24 @@ $(document).ready(function() {
                    .find('select[name=day]')
                    //loading the JSON when change is made
                    //this is done only once i.e. when the first change is made
-                   .one({
-                    'change' : function () {
-                      jsonData = JSONAjax();
-                    }
+                   .one('change', function () {
+                     jsonData = JSONAjax();
                    })
                    //binding change event for every change
-                   .bind({
-                    'change' : function () {
-                      $('#target').empty();
-                      selectedOption = $(this).val();
-                      if(!selectedOption) {
-                        $('#target').html('');
-                      } else {
-                        $('#target').html(jsonData[selectedOption]['title']
-                                    + '</br>' + jsonData[selectedOption]['text']
-                                    + '</br><img src = "' +jsonData[selectedOption]['image']
-                                    + '">');
-                      }
-                    }
+                   .on('change', function () {
+                     $('#target').empty();
+                     selectedOption = $(this).val();
+                     if(!selectedOption) {
+                       $('#target').html('');
+                     } else {
+                       $('#target').html(jsonData[selectedOption]['title']
+                                  + '</br>' + jsonData[selectedOption]['text']
+                                  + '</br><img src = "' +jsonData[selectedOption]['image']
+                                  + '">');
+                     }
                    })
                   //removing the button
                   .end()
                   .find('li.buttons')
                   .remove();                   
-}); 
-
+});
