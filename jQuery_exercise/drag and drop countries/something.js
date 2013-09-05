@@ -4,14 +4,14 @@ $(function() {
     revert : 'invalid',
     zIndex : 100,
     drag: function (event, ui) {
-      $('ul').addClass('list');
+      $('ul.list').addClass('active');
       var $element = event.target;
-      $($element).closest('ul').removeClass('list');
+      $($element).closest('ul').removeClass('active');
       move($element);
     }
   });
   function move (element) {
-    $('.list').droppable({
+    $('.active').droppable({
       drop: function() {
         $(this).append(element);
       }
