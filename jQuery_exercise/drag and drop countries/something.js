@@ -3,16 +3,15 @@ $(function() {
     helper : 'clone',
     revert : 'invalid',
     zIndex : 100,
-    drag: function (event,ui) {
+    drag: function (event, ui) {
+      $('ul').addClass('list');
       var $element = event.target;
-      var index = $($element).closest('ul')[0].id;
-      index = index == 1 ? 2 : 1;
-      move(index, $element);
+      $($element).closest('ul').removeClass('list');
+      move($element);
     }
   });
-  function move (index, element) {
-    index = '#'+index;
-    $(index).droppable({
+  function move (element) {
+    $('.list').droppable({
       drop: function() {
         $(this).append(element);
       }
