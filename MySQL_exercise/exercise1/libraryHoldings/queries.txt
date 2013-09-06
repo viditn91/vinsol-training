@@ -1,0 +1,18 @@
+SELECT title 
+FROM titles 
+WHERE publisher like 'macmillan';
+
+
+SELECT DISTINCT branch 
+FROM holdings
+WHERE title IN (SELECT title FROM titles WHERE author LIKE 'ann brown');
+
+
+SELECT DISTINCT branch 
+FROM holdings h, titles t 
+WHERE t.title=h.title 
+AND author LIKE 'ann brown';
+
+
+SELECT branch, SUM(copies) total_books 
+FROM holdings GROUP BY branch;

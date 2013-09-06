@@ -1,0 +1,14 @@
+SELECT DISTINCT location 
+FROM sandwiches s 
+WHERE s.filling IN 
+  (SELECT filling FROM tastes WHERE name='jones');
+
+SELECT DISTINCT location 
+FROM sandwiches s, tastes t 
+WHERE t.filling = s.filling 
+AND name='jones';
+
+SELECT location, count(DISTINCT name) 
+FROM tastes t, sandwiches s 
+WHERE t.filling = s.filling 
+GROUP BY location;
