@@ -1,0 +1,22 @@
+CREATE TABLE testing_table (name VARCHAR(10), contact_name VARCHAR(10), roll_no VARCHAR(10));
+
+ALTER TABLE testing_table DROP name;
+
+ALTER TABLE testing_table CHANGE contact_name username VARCHAR(10);
+
+ALTER TABLE testing_table ADD first_name VARCHAR(10);
+
+ALTER TABLE testing_table ADD last_name VARCHAR(10);
+
+ALTER TABLE testing_table MODIFY roll_no INT;
+
+SHOW COLUMNS FROM testing_table;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| username   | varchar(10) | YES  |     | NULL    |       |
+| roll_no    | int(11)     | YES  |     | NULL    |       |
+| first_name | varchar(10) | YES  |     | NULL    |       |
+| last_name  | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
