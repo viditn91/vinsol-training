@@ -1,0 +1,20 @@
+mysql> CREATE DATABASE vtapp;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE USER 'vtapp_user'@'%'
+    -> IDENTIFIED BY 'some-pass';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT ALL PRIVILEGES ON vtapp.*
+    -> TO 'vtapp_user'@'%';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SHOW GRANTS FOR 'vtapp_user'@'%';
++-----------------------------------------------------------------------------------------------------------+
+| Grants for vtapp_user@%                                                                                   |
++-----------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'vtapp_user'@'%' IDENTIFIED BY PASSWORD '*FED698F59C8BE1F44FC40445E365C797BE290A61' |
+| GRANT ALL PRIVILEGES ON `vtapp`.* TO 'vtapp_user'@'%'                                                     |
++-----------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
