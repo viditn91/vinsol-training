@@ -1,0 +1,7 @@
+# mysqldump -u root cookbook > backup.sql 
+
+mysql> CREATE DATABASE restored;
+Query OK, 1 row affected (0.00 sec)
+
+# mysql -u root restored < backup.sql
+
