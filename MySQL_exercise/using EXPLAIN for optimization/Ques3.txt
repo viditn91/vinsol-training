@@ -1,0 +1,16 @@
+3.1 We decide to index columns in comments table to optimize the SELECT query. What column(s) will you index in which order? Ask the exercise creator for a hint if you are confused.
+answer- 
+
+following are the columns as per my interpretation-
+id-			unique id to each comment,
+commentable_type-	article/photo,
+commentable_id-		1/2; if commentable yes/no,
+user_id-		the unique id of the user who has commented
+
+The columns commentable_type, commentable_id and user_id should all be indexed. This can be done by-
+ALTER TABLE comments ADD INDEX(user_id, commentable_id, commentable_type);
+
+The above order is used because-
+1. Providing user_id as the first preference, will filter all the records with the user_id, whereas other columns will simply filter half of the results.
+2. Providing commentable_id as the second preference, will filter the records as commentable or not, and if they are not commentable then there is no point in finding out the commentable_type.
+3. If the record is commentable then we can search for the commentable_type.

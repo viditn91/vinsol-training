@@ -1,0 +1,26 @@
+4.1 EXPLAIN a SELECT query against one of your databases which employs an INNER JOIN between two tables. What does the output look like? What does the values under different columns mean? Do you get only one row in EXPLAIN's output?
+answer-
+
+Here is the output: The two rows are for the two tables t and h which are joined--
++----+-------------+-------+------+---------------+------+---------+------+------+--------------------------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra                          |
++----+-------------+-------+------+---------------+------+---------+------+------+--------------------------------+
+|  1 | SIMPLE      | t     | ALL  | NULL          | NULL | NULL    | NULL |    5 | Using where; Using temporary   |
+|  1 | SIMPLE      | h     | ALL  | NULL          | NULL | NULL    | NULL |   10 | Using where; Using join buffer |
++----+-------------+-------+------+---------------+------+---------+------+------+--------------------------------+
+
+
+1. id = 1 : 			In both the rows is the sequential number of the SELECT within the query which is 1 as there is no subquery.
+2. select_type = SIMPLE : 	In both the rows, as there as no UNIONs or subqueries involved.
+3. table : 			table name for each table.
+4. type = ALL :			A full table scan is done for both the tables as no indexing is done.
+5. possible_keys = NULL :	Indicates that there are no indexes MySQL can choose from to use to find the rows in this table.
+6. key = NULL :			Indicates the key (index) that MySQL actually decided to use which is nothing in this case.
+7. key_len= NULL :		NULL as there is no key.
+8. ref = NULL : 		The ref column shows which columns or constants are compared to the index named in the key column which is NULL.
+9. rows:			The rows column indicates the number of rows MySQL believes it must examine to execute the query. Which is the total number 					of records as no index is provided. So 5 and 10 in table t and h.
+10.Extra : row1			using where- 		A WHERE clause is used to restrict which rows to match against the next table.
+				using tempory- 		To resolve the query, MySQL needs to create a temporary table to hold the result.
+   Extra : row2			using where- 		A WHERE clause is used to restrict which rows to match against the next table.
+				using join buffer- 	As join is being made.
+

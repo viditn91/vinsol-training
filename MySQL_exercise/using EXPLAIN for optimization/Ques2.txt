@@ -1,0 +1,13 @@
+2.1 The value under 'rows' column in the output of EXPLAIN query and SELECT query after it are same. What does it mean?
+answer- 
+	The 'rows' column indicates the number of rows MySQL believes it must examine to execute the query and in this particular case
+	the user_id column is not indexed so it searches for the user_id of 41 throughout the table searching in every row thereby explaining
+	the number '1002345' which is the actual number of rows in the table.
+	 
+
+
+2.2 Is the SELECT query optimal? If no, how do we optimize it?
+answer-
+	No the query is not optimal.
+	It can be optimized by adding an index to the user_Id column--
+	ALTER TABLE comments ADD INDEX(user_id);

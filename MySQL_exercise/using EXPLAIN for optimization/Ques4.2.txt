@@ -1,0 +1,20 @@
+
+
+4.2 Form the same select query in above question using a subquery instead of a JOIN. What does the EXPLAIN output look like now? Which query is better and why?
+
+Here is the output: The two rows are for the primary and the dependent subquery--
++----+--------------------+-------+------+---------------+------+---------+------+------+------------------------------+
+| id | select_type        | table | type | possible_keys | key  | key_len | ref  | rows | Extra                        |
++----+--------------------+-------+------+---------------+------+---------+------+------+------------------------------+
+|  1 | PRIMARY            | h     | ALL  | NULL          | NULL | NULL    | NULL |   10 | Using where; Using temporary |
+|  2 | DEPENDENT SUBQUERY | t     | ALL  | NULL          | NULL | NULL    | NULL |    5 | Using where                  |
++----+--------------------+-------+------+---------------+------+---------+------+------+------------------------------+
+the follwing difference is seen-
+1. id : 			Primary query has an id of 1 and the subquery of 2.
+2. select_type :	 	Primary query has a type of PRIMARY and subquery of DEPENDENT SUBQUERY.
+
+Which query is better and why?
+In this particular case:
+	- if the joining columns are given an index then, A JOIN is better than SUBQUERY, because SUBQUERY runs once for every row whereas the JOIN happens on indexes.
+	- However, SUBQUERY is faster when we have to retrieve data from large number of tables. Because it becomes tedious to JOIN more tables. JOIN is faster to retrieve data from database when we have less number of tables.
+
