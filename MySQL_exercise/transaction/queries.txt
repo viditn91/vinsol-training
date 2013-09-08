@@ -1,0 +1,62 @@
+Queries:
+Insert some raw data and do the following queries using mysql transaction statement:
+
+mysql>START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select balance from accounts for update;
++---------+
+| balance |
++---------+
+|    1200 |
+|    1500 |
+|    1800 |
+|    1500 |
++---------+
+4 rows in set (0.00 sec)
+
+
+i) userA is depositing 1000 Rs. his account
+
+mysql> UPDATE accounts SET balance = balance + 1000 
+    -> WHERE account_no 
+    -> IN (SELECT account_no FROM users 
+    -> WHERE name LIKE 'usera');
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+ii) userA is withdrawing 500 Rs.
+
+mysql> UPDATE accounts SET balance = balance - 500 
+    -> WHERE account_no 
+    -> IN (SELECT account_no FROM users 
+    -> WHERE name LIKE 'usera');
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+iii) userA is transferring 200 Rs to userB's account
+
+mysql> UPDATE accounts SET balance = balance - 200 
+    -> WHERE account_no 
+    -> IN (SELECT account_no FROM users 
+    -> WHERE name LIKE 'usera');
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE accounts SET balance = balance + 200 
+    -> WHERE account_no 
+    -> IN (SELECT account_no FROM users 
+    -> WHERE name LIKE 'userb');
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.03 sec)
+
+
+
+
