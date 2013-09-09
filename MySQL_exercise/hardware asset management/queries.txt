@@ -1,0 +1,134 @@
+// 1. 	Find the name of the employee who has been alloted the maximum number of assets till date. .
+
+mysql> select @max := max(counted) 
+    -> from (select count(*) as counted from assets_log al, employees e where al.employee_id = e.id group by e.name) as counts;
++----------------------+
+| @max := max(counted) |
++----------------------+
+|                    2 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select name, count(*) as assets_assigned 
+    -> from assets_log al, employees e 
+    -> where al.employee_id = e.id 
+    -> group by e.name 
+    -> having count(*) = @max;
++-------+-----------------+
+| name  | assets_assigned |
++-------+-----------------+
+| alice |               2 |
+| bob   |               2 |
++-------+-----------------+
+2 rows in set (0.00 sec)
+
+
+
+// 2.	Identify the name of the employee who currently has the maximum number of assets as of today. .
+
+mysql> select @max := max(counted) 
+    -> from (select count(*) as counted from assets_log al, employees e where al.employee_id = e.id and al.unassigned_at is null group by e.name) as counts;
++----------------------+
+| @max := max(counted) |
++----------------------+
+|                    1 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select name, count(*) as max_alloted_assets 
+    -> from assets_log al, employees e 
+    -> where al.employee_id = e.id
+    -> and al.unassigned_at is null 
+    -> group by e.name 
+    -> having count(*) = @max;
++-------+--------------------+
+| name  | max_alloted_assets |
++-------+--------------------+
+| alice |                  1 |
+| bob   |                  1 |
++-------+--------------------+
+2 rows in set (0.00 sec)
+
+
+
+// 3.	Find name and period of all the employees who have used a Laptop - let’s say laptop A - since it was bought by the company-
+
+mysql> select e.name, datediff( IFNULL(unassigned_at, current_timestamp),assigned_at) as period 
+    -> from assets_log al, employees e 
+    -> where al.employee_id = e.id 
+    -> and asset_id in (select id from assets where name like 'laptop a');
++-------+--------+
+| name  | period |
++-------+--------+
+| alice |    364 |
++-------+--------+
+1 row in set (0.01 sec)
+
+
+
+// 4.	Find the list of assets that are currently not assigned to anyone hence lying with the asset manager(HR)-
+
+mysql> select name from assets
+    -> where id not in (select asset_id from assets_log where unassigned_at is null)
+    -> and id not in (select asset_id from public_assets where location is not null);
++-----------+
+| name      |
++-----------+
+| laptop a  |
+| laptop b  |
+| laptop N1 |
+| laptop N2 |
+| printer B |
++-----------+
+5 rows in set (0.02 sec)
+
+
+
+// 5.	An employee say Bob is leaving the company, write a query to get the list of assets he should be returning to the company.
+
+mysql> select a.name as assets_to_be_returned 
+    -> from assets a join assets_log al 
+    -> on a.id = al.asset_id 
+    -> where al.unassigned_at is null 
+    -> and employee_id in (select id from employees where name like 'bob');
++-----------------------+
+| assets_to_be_returned |
++-----------------------+
+| iphone B              |
++-----------------------+
+1 row in set (0.00 sec)
+
+
+
+//6. 	Write a query to find assets which are out of warranty (Do using subquery also).
+
+mysql> select name from assets
+    -> where datediff(current_timestamp,bought_at) > warranty*365 ;
++------------+
+| name       |
++------------+
+| laptop a   |
+| laptop b   |
+| laptop N1  |
+| laptop N2  |
+| iphone A   |
+| iphone B   |
+| projector  |
+| printer B  |
++------------+
+8 rows in set (0.00 sec)
+
+
+
+//7.	Return a list of Employee Names who do not have any asset assigned to them (Do using subquery also).
+
+mysql> select name from employees e
+    -> where id not in (select employee_id from assets_log where unassigned_at is null);
++-------+
+| name  |
++-------+
+| chris |
+| duke  |
+| emily |
++-------+
+3 rows in set (0.00 sec)
