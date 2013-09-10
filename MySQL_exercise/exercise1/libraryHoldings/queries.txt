@@ -1,18 +1,57 @@
+//	 the names of all library books published by Macmillan. 
+
 SELECT title 
 FROM titles 
-WHERE publisher like 'macmillan';
+WHERE publisher ='macmillan';
++----------+
+| title    |
++----------+
+| susannah |
+| the wife |
++----------+
+2 rows in set (0.14 sec)
 
+
+//	branchesthat hold any books byAnnBrown (using a nested subquery). 
 
 SELECT DISTINCT branch 
 FROM holdings
-WHERE title IN (SELECT title FROM titles WHERE author LIKE 'ann brown');
+WHERE title IN (SELECT title FROM titles WHERE author = 'ann brown');
++--------+
+| branch |
++--------+
+| b1     |
+| b2     |
+| b3     |
++--------+
+3 rows in set (0.04 sec)
 
+
+//	branchesthat hold any books byAnnBrown (without using a nested subquery). 
 
 SELECT DISTINCT branch 
 FROM holdings h, titles t 
 WHERE t.title=h.title 
-AND author LIKE 'ann brown';
+AND author = 'ann brown';
++--------+
+| branch |
++--------+
+| b1     |
+| b2     |
+| b3     |
++--------+
+3 rows in set (0.00 sec)
 
+//	the total number of books held at each branch. 
 
 SELECT branch, SUM(copies) total_books 
 FROM holdings GROUP BY branch;
++--------+-------------+
+| branch | total_books |
++--------+-------------+
+| b1     |           6 |
+| b2     |           9 |
+| b3     |           9 |
++--------+-------------+
+3 rows in set (0.05 sec)
+
