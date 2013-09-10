@@ -132,3 +132,17 @@ mysql> select name from employees e
 | emily |
 +-------+
 3 rows in set (0.00 sec)
+
+mysql> select name from 
+    -> employees e left join assets_log al 
+    -> on e.id = al.employee_id  
+    -> where e.id not in (select employee_id from assets_log where assigned_at is not null and unassigned_at is null);
++-------+
+| name  |
++-------+
+| chris |
+| duke  |
+| emily |
++-------+
+3 rows in set (0.00 sec)
+
