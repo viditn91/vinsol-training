@@ -21,44 +21,43 @@ $(document).ready(function() {
     $('#container').append('<img src='+ jsonData[index]['url'] +'>')
                    .children()
                    .eq(index)
-                   .addClass(jsonData[index]['color'])
-                   .addClass(jsonData[index]['brand'])
-                   .addClass(jsonData[index]['sold_out'])
-                   .removeClass('BRAND');                   
+                   .attr('color', jsonData[index]['color'])
+                   .attr('brand', jsonData[index]['brand'])
+                   .attr('sold_out', jsonData[index]['sold_out'])
   });
+  $('img').show();
   //Unchecking all checkboxes
   $('input:checked').each(function (index) {
     $(this)[0].checked = false;
   });
   //Binding change event to the checkboxes
   $(':checkbox').bind('change', function() {
-    string = "";
     var key   = [],
         value = [];
-    //Selecting all the checked Boxes and storing the values of the keys
+    var string = "";
+    //Selecting all the checked Boxes and storing '[key=value]'
     // in a string. Value of each key is separated by ',' while for different
-    // keys its separated by ' '.
+    // keys its separated by ';'
     $('input:checked').each(function (index) {
       key.push($(this)[0].name);
       value.push($(this)[0].value);
       if (string == ""){
-        string += '.' + value[index];
+        string += '[' + key[index] + '="' + value[index] + '"]';
       } else if (key[index] == key[index-1]) {
-        string += ',.' + value[index];
+        string += ',[' + key[index] + '="' + value[index] + '"]';
       } else if (key[index] != key[index-1]) {
-        string += ' .' +value[index];
+        string += ';[' + key[index] + '="' + value[index] + '"]';
       }
     });
-    //an array to store the string splitted by spaces.
-    var arr = string.split(' ');
+    var arr = string.split(';');
     var $allImages = $('img');
     $allImages.hide();
-    //For loop to selectively filter the values from $allImages
     if(string) {
+      //For loop to selectively filter the values from $allImages
       for (var i in arr) {
-        $allImages = $allImages.filter(arr[i]); 
+        $allImages = $allImages.filter(arr[i]);
       }
-      $allImages.show();
     }
+    $allImages.show();
   });
 });
