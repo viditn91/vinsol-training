@@ -1,8 +1,6 @@
 Queries:
 Insert some raw data and do the following queries using mysql transaction statement:
 
-mysql>START TRANSACTION;
-Query OK, 0 rows affected (0.00 sec)
 
 mysql> select balance from accounts for update;
 +---------+
@@ -18,44 +16,43 @@ mysql> select balance from accounts for update;
 
 i) userA is depositing 1000 Rs. his account
 
-mysql> UPDATE accounts SET balance = balance + 1000 
-    -> WHERE account_no 
-    -> IN (SELECT account_no FROM users 
-    -> WHERE name LIKE 'usera');
-Query OK, 1 row affected (0.07 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
+mysql> 	START TRANSACTION;
+	UPDATE accounts SET balance = balance + 1000 
+	WHERE account_no = (SELECT account_no FROM users WHERE name = 'usera');
+	COMMIT;
 
 
 ii) userA is withdrawing 500 Rs.
 
-mysql> UPDATE accounts SET balance = balance - 500 
-    -> WHERE account_no 
-    -> IN (SELECT account_no FROM users 
-    -> WHERE name LIKE 'usera');
-Query OK, 1 row affected (0.07 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
+mysql> 	START TRANSACTION;
+	UPDATE accounts SET balance = balance - 500 
+	WHERE account_no = (SELECT account_no FROM users WHERE name = 'usera')
+    	COMMIT;
 
 
 iii) userA is transferring 200 Rs to userB's account
 
+mysql> 	START TRANSACTION;
+	UPDATE accounts SET balance = balance - 200 
+   	WHERE account_no = (SELECT account_no FROM users WHERE name = 'usera');
+	UPDATE accounts SET balance = balance + 200 
+	WHERE account_no = (SELECT account_no FROM users WHERE name = 'userb');
+	COMMIT;
+
+// if an error occurs;
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
 mysql> UPDATE accounts SET balance = balance - 200 
-    -> WHERE account_no 
-    -> IN (SELECT account_no FROM users 
-    -> WHERE name LIKE 'usera');
-Query OK, 1 row affected (0.07 sec)
+    -> WHERE account_no = (SELECT account_no FROM users WHERE name = 'usera');
+Query OK, 1 row affected (0.02 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> UPDATE accounts SET balance = balance + 200 
-    -> WHERE account_no 
-    -> IN (SELECT account_no FROM users 
-    -> WHERE name LIKE 'userb');
-Query OK, 1 row affected (0.07 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> COMMIT;
-Query OK, 0 rows affected (0.03 sec)
+mysql> UPDATE accounts SET balanc = balance + 200 
+    -> WHERE account_no = (SELECT account_no FROM users WHERE name = 'userb');
+ERROR 1054 (42S22): Unknown column 'balanc' in 'field list'
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.05 sec)
 
 
 
