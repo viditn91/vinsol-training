@@ -8,7 +8,7 @@ $(function () {
   $('tr:not(:first-child)').each(function (index){
     var len = $('th').length;
     //Adding product in first coloumn
-    $(this).append('<td id ="' + index +'"></td>')
+    $(this).append('<td></td>')
            .children()
            .eq(0)
            .text(product[index])
@@ -18,36 +18,41 @@ $(function () {
       $(this).append('<td></td>')
              .children()
              .eq(i)
-             .append('<input type = "radio" id="' + index + i + '" name = "'+ product[index] +'">');
+             .append('<input type = "radio" name="'+ product[index] +'">');
     }
   });
-  //Adding click event to ratings
-  $('#table tbody').delegate('th:not(:first-child)','click', function(){ 
-    $(this).addClass('clicked')
-           .siblings()
-           .removeClass('clicked');
-    findPosition($(this)[0].cellIndex);
-  });
-  //Adding click event to products
-  $('#table tbody').delegate('td.product','click', function(){ 
-    $('td.product').removeClass('clicked');
-    $(this).addClass('clicked');
-    findPosition($(this)[0]);
-  });
-  //variables for storing the position of the radio-button to be checked
   var row_position = null,
       col_position = null;
-  //function     
-  function findPosition (element) {
-    if (element.nodeName){
-      row_position = element.id;
-      col_position = null;
-    } else {
-      col_position = element;
-    }
+  //disabling all buttons initially
+  $(':radio').attr('disabled',true);
+  //Adding click event to ratings
+  $('#table tbody').delegate('th:not(:first-child)','click', function() { 
+    $('th:not(:first-child)').removeClass('clicked');
+    var scope = $(this);
+    scope.addClass('clicked');
+    col_position = scope[0].cellIndex;
+    setButton();
+  });
+  //Adding click event to products
+  $('#table tbody').delegate('td.product','click', function() { 
+    $('td.product').removeClass('clicked');
+    var scope = $(this);
+    scope.addClass('clicked');
+    row_position = scope.parent()[0].rowIndex;
+    setButton();
+  });
+  //function to set the button corresponding to the row and column positon and disable the rest
+  function setButton () {
     if(row_position && col_position) {
-      var string = '#' + row_position + col_position;
-      $(string)[0].checked = 1;
-    }
+      $('td:not(.product)').each( function () {
+        var scope = $(this);
+        if(scope[0].cellIndex == col_position && scope.parent()[0].rowIndex == row_position) {
+          $(':radio[name=' + product[row_position-1]+ ']').attr('disabled', true);
+          scope.find(':radio').attr('disabled',false);
+          scope.find(':radio')[0].checked = 1;
+          col_position = null;
+        }
+      });
+    }    
   }
 });
