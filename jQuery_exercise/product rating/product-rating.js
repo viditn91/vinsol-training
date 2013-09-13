@@ -28,9 +28,8 @@ $(function () {
   //Adding click event to ratings
   $('#table tbody').delegate('th:not(:first-child)','click', function() { 
     $('th:not(:first-child)').removeClass('clicked');
-    var scope = $(this);
-    scope.addClass('clicked');
-    col_position = scope[0].cellIndex;
+    $(this).addClass('clicked');
+    col_position = this.cellIndex;
     setButton();
   });
   //Adding click event to products
@@ -40,19 +39,17 @@ $(function () {
     scope.addClass('clicked');
     row_position = scope.parent()[0].rowIndex;
     setButton();
+    $('th').removeClass('clicked');
   });
-  //function to set the button corresponding to the row and column positon and disable the rest
+  //function to set the button corresponding to the row and column positon
   function setButton () {
     if(row_position && col_position) {
-      $('td:not(.product)').each( function () {
-        var scope = $(this);
-        if(scope[0].cellIndex == col_position && scope.parent()[0].rowIndex == row_position) {
-          $(':radio[name=' + product[row_position-1]+ ']').attr('disabled', true);
-          scope.find(':radio').attr('disabled',false);
-          scope.find(':radio')[0].checked = 1;
-          col_position = null;
-        }
-      });
-    }    
+      var tr_scope = $('tr:eq(' + row_position + ')');
+      var td_scope = $('tr:eq(' + row_position + ')').children().eq(col_position).find(':radio');
+      tr_scope.find(':radio').attr('disabled',true);
+      td_scope.attr('disabled',false);
+      td_scope[0].checked = 1;
+      col_position = null;
+    }
   }
 });
