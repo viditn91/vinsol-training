@@ -16,9 +16,9 @@ FROM articles a, comments c
 WHERE a.user_Id = 3 
 AND a.articleId = c.article_Id;
 
-SELECT comment, (SELECT article FROM articles WHERE articleId = article_Id AND user_Id = 3) AS article 
+SELECT comment, (SELECT article FROM articles WHERE articleId = article_Id) article  
 FROM comments 
-HAVING article IS NOT NULL ;
+WHERE article_Id IN (SELECT articleId FROM articles WHERE user_Id = 3);
 
 
 // Write a query to select all articles which do not have any comments (Do using subquery also)-
