@@ -1,9 +1,14 @@
-def fibonacci
-  array = (1..1000).to_a
-  results = Array.new
-  array.each do |n|
-    results[n-1] = n-1 > 1? yield(results[n-3], results[n-2]) : n-1 		
+def fibonacci(limit, results)
+  0.upto(limit - 1) do |n|
+    results[n] = n > 1? yield(results[n - 2], results[n - 1]) : n 		
   end
+end
+
+def show_results(results)
   p results
 end
-fibonacci { |a, b| a + b }
+
+fibonacci_upto = 1000
+result_array = Array.new 
+fibonacci(fibonacci_upto, result_array) { |a, b| a + b }
+show_results(result_array)
