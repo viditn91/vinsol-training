@@ -25,9 +25,9 @@ mysql> select distinct city from visitors;
 
 // 2. 	How many people responded from each city ?
 
-mysql> select city, count(*) as no_of_people_responded
-    -> from visitors
-    -> group by city;
+mysql> 	select city, count(*) as no_of_people_responded
+	from visitors
+	group by city;
 +-----------+------------------------+
 | city      | no_of_people_responded |
 +-----------+------------------------+
@@ -43,18 +43,9 @@ mysql> select city, count(*) as no_of_people_responded
 
 // 3.	Which city were the maximum respondents from?
 
-mysql> select @max := max(counts) 
-    -> from (select count(*) as counts from visitors group by city) as counted;
-+---------------------+
-| @max := max(counts) |
-+---------------------+
-|                  42 |
-+---------------------+
-1 row in set (0.12 sec)
-
-mysql> select city from visitors
-    -> group by city
-    -> having count(*) = @max;
+mysql> 	select city from visitors
+	group by city
+	having count(*) = (select max(counts) from (select count(*) as counts from visitors group by city) as counted);
 +----------+
 | city     |
 +----------+
@@ -66,24 +57,23 @@ mysql> select city from visitors
 
 // 4.	What all email domains did people respond from ?
 
-mysql> select count(*), SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as domain 
-    -> from visitors group by domain;
-+----------+--------------+
-| count(*) | domain       |
-+----------+--------------+
-|       49 | gmail.com    |
-|       49 | hotmail.com  |
-|       51 | me.com       |
-|       51 | yahoo.com    |
-+----------+--------------+
+mysql> 	select distinct SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as domain 
+	from visitors;
++--------------+
+| domain       |
++--------------+
+| hotmail.com  |
+| yahoo.com    |
+| me.com       |
+| gmail.com    |
++--------------+
 4 rows in set (0.00 sec)
 
 
 
 // 5. 	Which is the most popular email domain among the respondents ?
 
-mysql> select @max := max(counts) 
-    -> from (select count(*) as counts from visitors group by SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1)) as counted;
+mysql>	
 +---------------------+
 | @max := max(counts) |
 +---------------------+
@@ -91,10 +81,10 @@ mysql> select @max := max(counts)
 +---------------------+
 1 row in set (0.02 sec)
 
-mysql> select SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as most_popular_domain 
-    -> from visitors 
-    -> group by most_popular_domain 
-    -> having count(*) = @max ;
+mysql> 	select SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as most_popular_domain 
+	from visitors 
+	group by most_popular_domain
+	having count(*) = (select max(counts) from (select count(*) as counts from visitors group by SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1)) as counted);
 +---------------------+
 | most_popular_domain |
 +---------------------+
