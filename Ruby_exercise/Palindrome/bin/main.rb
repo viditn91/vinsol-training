@@ -1,6 +1,5 @@
 require_relative '../lib/string.rb'
 begin
-  input = gets.chomp
-  newString = String.new(input)
+  newString = String.new(gets.chomp.downcase)
   p newString.palindrome?
-end while not input =~ /^q$/i
+end while not newString =~ /^q$/i
