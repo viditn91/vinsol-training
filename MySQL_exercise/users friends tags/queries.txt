@@ -1,77 +1,72 @@
 // 1.	Find image that has been tagged most no of times.
 
-select @max := max(counts)
-from (select count(*) as counts from tags group by image_id) as counted;
-
 select image_id from tags 
 group by image_id
-having count(*) = @max; 
+having count(*) = (select max(counts) from (select count(*) as counts from tags group by image_id) as counted); 
 +----------+
 | image_id |
 +----------+
-| img1     |
-| img2     |
+|        6 |
 +----------+
-2 rows in set (0.00 sec)
+1 row in set (0.20 sec)
 
 
+// 2.	Find all images belonging to the friends of a particular 'usera'--
 
-// 2.	Find all images belonging to the friends of a particular 'usera'-
-	
-mysql> select id from images 
-where image_user in (select friend from friends where user_id='usera');
-+------+
-| id   |
-+------+
-| img2 |
-| img4 |
-| img1 |
-+------+
-3 rows in set (0.00 sec)
+select id
+from images i
+join friends f on i.image_user = f.friend
+where f.user_id = 6;
++----+
+| id |
++----+
+|  4 |
+|  8 |
+|  6 |
+|  5 |
+|  2 |
+|  7 |
+|  9 |
++----+
+7 rows in set (0.00 sec)
 
 
 // 3.	Find all friends of a particular user (Say, userA) who has tagged him in all of his pics.
 
-mysql> select* from 
-(select image_user as id from images i where image_user in
-	(select friend from friends where user_id='usera')) p 
-left join 
-(select one.image_user as image from
-	(select*from images i where image_user in
-		(select friend from friends where user_id='usera')) as one 
-	left join 
-	(select * from tags t where tagged='usera') as two
-	on one.id=two.image_id 
-	where tagged is null) q  
-on p.image=q.image 
-where q.image is null;
+select friend
+from friends f 
+join images i on f.friend = i.image_user and f.user_id = 9
+join tags t on i.id = t.image_id
+group by friend
+having sum(tagged = user_id) = count(distinct image_id)
++--------+
+| friend |
++--------+
+|      1 |
+|      2 |
++--------+
+2 rows in set (0.00 sec)
 
-Empty set (0.00 sec)
 
 
 // 4.	Find friend of a particular user (Say, userA) who have tagged him most no. of times.
 
-select @max := max(counts)
-from (
-  select count(*) as counts 
-  from images i,tags t 
-  where i.id = t.image_id 
-  and tagged = 'usera'
-  and image_user in (select friend from friends where user_id='usera') 
-  group by image_user
-) as counted; 
+select friend
+from friends f 
+join images i on f.friend = i.image_user and f.user_id = 9
+join tags t on i.id = t.image_id
+group by friend
+having count(distinct image_id) = (select count(distinct image_id) from friends join images on friend = image_user
+	join tags on images.id = image_id 
+	group by friend 
+	having sum(tagged = user_id) = count(distinct image_id)
+	order by count(distinct image_id) desc limit 1);
++--------+
+| friend |
++--------+
+|      2 |
++--------+
+1 row in set (0.05 sec)
 
-mysql> select image_user from images i,tags t 
-    -> where i.id = t.image_id 
-    -> and tagged = 'usera'
-    -> and image_user in (select friend from friends where user_id='usera') 
-    -> group by image_user 
-    -> having count(*) = @max;
-+------------+
-| image_user |
-+------------+
-| userc      |
-+------------+
-1 row in set (0.02 sec)
 
 
