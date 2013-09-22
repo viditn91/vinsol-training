@@ -4,4 +4,8 @@ class Bike < Vehicle
     super(name, price)
     @dealer = dealer
   end
+
+  def to_s
+    "#{ super } and dealer:#{ @dealer }"
+  end
 end

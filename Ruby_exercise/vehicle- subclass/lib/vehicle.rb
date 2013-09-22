@@ -9,6 +9,6 @@ class Vehicle
   end
 
   def to_s
-    @dealer ? [@name, @price, @dealer] : [@name, @price]
+    "name:#{ @name } and price:#{ @price }"
   end
 end
