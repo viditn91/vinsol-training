@@ -8,7 +8,7 @@ class Customer
   end
   
   def withdrawal(amt)
-    @balance = @balance - amt
+    @balance = @balance - amt if @balance >= amt
   end
 
   def deposit(amt)
