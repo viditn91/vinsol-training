@@ -43,15 +43,16 @@ mysql> 	select city, count(*) as no_of_people_responded
 
 // 3.	Which city were the maximum respondents from?
 
-mysql> 	select city from visitors
-	group by city
-	having count(*) = (select max(counts) from (select count(*) as counts from visitors group by city) as counted);
+mysql> 	select respondents.city as city from 
+	(select city, count(email) as counts from visitors group by city) as respondents,
+	(select count(email) as counts from visitors group by city order by count(email) desc limit 1) as max_respondents	 
+	where respondents.counts = max_respondents.counts;
 +----------+
 | city     |
 +----------+
 |  Chennai |
 +----------+
-1 row in set (0.03 sec)
+1 row in set (0.01 sec)
 
 
 
@@ -81,17 +82,19 @@ mysql>
 +---------------------+
 1 row in set (0.02 sec)
 
-mysql> 	select SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as most_popular_domain 
-	from visitors 
-	group by most_popular_domain
-	having count(*) = (select max(counts) from (select count(*) as counts from visitors group by SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1)) as counted);
+mysql> 	select domains.domain as most_popular_domain from 
+	(select SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) as domain, count(*) as counts from visitors group by domain) as domains,
+	(select count(*) as counts from visitors group by SUBSTR(email, INSTR(email, '@')+1, INSTR(email, '.')-1) order by count(*) desc limit 1) as famous_domains 
+	where domains.counts = famous_domains.counts;
+
 +---------------------+
 | most_popular_domain |
 +---------------------+
 | me.com              |
 | yahoo.com           |
 +---------------------+
-2 rows in set (0.01 sec)
+2 rows in set (0.00 sec)
+
 
 
 
