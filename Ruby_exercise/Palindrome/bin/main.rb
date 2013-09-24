@@ -1,11 +1,7 @@
 require_relative '../lib/string.rb'
-loop do
+begin
   puts "enter a string...(q/Q to exit)"
   answer = gets.chomp
-  case answer
-  when /^q$/i
-    break
-  else
-    answer.downcase.palindrome?
-  end
-end
+  break if answer =~ /^q$/i
+  p answer.palindrome?  
+end while 1

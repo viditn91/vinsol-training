@@ -1,5 +1,5 @@
 class String
   def palindrome?
-    p self == reverse ? "Its a palindrome" : "Its not a palindrome"
+    self.downcase == reverse.downcase
   end
 end
