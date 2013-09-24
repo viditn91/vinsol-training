@@ -20,15 +20,13 @@ where f.user_id = 6;
 +----+
 | id |
 +----+
-|  4 |
-|  8 |
-|  6 |
-|  5 |
 |  2 |
+|  3 |
+|  5 |
+|  6 |
 |  7 |
-|  9 |
 +----+
-7 rows in set (0.00 sec)
+5 rows in set (0.03 sec)
 
 
 // 3.	Find all friends of a particular user (Say, userA) who has tagged him in all of his pics.
@@ -38,14 +36,14 @@ from friends f
 join images i on f.friend = i.image_user and f.user_id = 9
 join tags t on i.id = t.image_id
 group by friend
-having sum(tagged = user_id) = count(distinct image_id)
+having sum(tagged = user_id) = count(distinct image_id);
 +--------+
 | friend |
 +--------+
 |      1 |
-|      2 |
+|      6 |
 +--------+
-2 rows in set (0.00 sec)
+2 rows in set (0.04 sec)
 
 
 
@@ -64,9 +62,8 @@ having count(distinct image_id) = (select count(distinct image_id) from friends 
 +--------+
 | friend |
 +--------+
+|      1 |
 |      2 |
+|      6 |
 +--------+
-1 row in set (0.05 sec)
-
-
-
+3 rows in set (0.07 sec)
