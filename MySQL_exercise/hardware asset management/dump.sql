@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `assets_log`;
 CREATE TABLE `assets_log` (
   `id` int(11) DEFAULT NULL,
   `asset_id` int(11) DEFAULT NULL,
-  `employee_name` varchar(10) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
   `assigned_at` date DEFAULT NULL,
   `unassigned_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -62,7 +62,7 @@ CREATE TABLE `assets_log` (
 
 LOCK TABLES `assets_log` WRITE;
 /*!40000 ALTER TABLE `assets_log` DISABLE KEYS */;
-INSERT INTO `assets_log` VALUES (1,1,'alice','2011-01-01','2011-12-31'),(2,2,'bob','2011-01-01','2011-12-31'),(3,5,'alice','2011-04-01',NULL),(4,6,'bob','2011-01-01',NULL);
+INSERT INTO `assets_log` VALUES (1,1,1,'2011-01-01','2011-12-31'),(2,2,2,'2011-01-01','2011-12-31'),(3,5,1,'2011-04-01',NULL),(4,6,2,'2011-01-01',NULL);
 /*!40000 ALTER TABLE `assets_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
