@@ -1,5 +1,5 @@
 class String
-  def replace
+  def replace_vowel_with_asterisk
     self.gsub(/[aeiou]/i, '*')
   end
 end
