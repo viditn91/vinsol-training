@@ -1,5 +1,8 @@
 class String
   def palindrome?
-    self.downcase == reverse.downcase
+    self == reverse
+  end
+  def palindrome_with_downcase?
+    downcase.palindrome?
   end
 end
