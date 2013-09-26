@@ -1,3 +1,3 @@
 require_relative '../lib/integer.rb'
-number = 30
+number = Integer(gets)
 number.find_primes if number > 1

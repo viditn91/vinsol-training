@@ -1,17 +1,16 @@
 class Array
   def to_hash
-    hash = Hash.new{ |hash, key| hash[key] = [] }
-    for element in self
-      hash[element.to_s.size].push(element)
+    hash = Hash.new{ |h, k| h[k] = [] }
+    self.inject do |key, value|
+      hash[value.to_s.size] << value
     end
     to_groupedHash(hash)
   end
   
   def to_groupedHash(hash)
-    grouped_hash = Hash.new{ |grouped_hash, key| grouped_hash[key] = [] }
-    for key in hash.keys
-      key.even? ? grouped_hash["even"].push(hash[key]) : grouped_hash["odd"].push(hash[key])
+    hash.inject(Hash.new{ |h, k| h[k] = [] }) do |h, (key, value)|
+      key.even? ? h["even"] << value : h["odd"] << value 
+      h
     end
-    grouped_hash
   end
 end
