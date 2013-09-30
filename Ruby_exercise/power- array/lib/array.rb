@@ -1,5 +1,5 @@
 class Array
   def power(exponent)
-    self.each_with_index { |value, index| self[index] = value ** exponent }
+    "#{ self } raise to #{ exponent } is #{ collect { |element| element **= exponent } }"
   end
 end
