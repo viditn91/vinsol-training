@@ -1,4 +1,4 @@
 require_relative '../lib/integer.rb'
 puts "enter a number_"
-number = Integer(gets)
+number = gets.to_i
 p number.factorial
