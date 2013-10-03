@@ -10,4 +10,8 @@ module Sales_Tax
     end
     sales_tax.round(2)    
   end
+
+  def self.cal_taxed_price(product)
+    product.price + self.cal_sales_tax(product)
+  end
 end
