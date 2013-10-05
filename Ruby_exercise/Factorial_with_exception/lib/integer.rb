@@ -1,5 +1,13 @@
+class NegativeValueError < RuntimeError
+end
+
 class Integer
+  
   def factorial
-    "factorial of #{ self } is #{ self > 0 ? (1..self).to_a.inject(:*) : 1 }"  
+    if self > 0 then self * (self - 1).factorial
+    elsif self == 0 then 1
+    else raise NegativeValueError
+    end
   end
+
 end
