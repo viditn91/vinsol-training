@@ -1,13 +1,13 @@
 class Employee
-  @@hash = Hash.new { |h, k| h[k] = [] }
+  @@employees_by_designation = Hash.new { |h, k| h[k] = [] }
 
   def self.add_employee(line)
-    name, empId, desig = line.split(',').each{ |field| field.strip! }
+    name, empId, desig = line.each{ |field| field.strip! }
     self.new(name, empId, desig)
   end
 
   def self.get_hash
-    return @@hash
+    @@employees_by_designation
   end 
 
   def initialize(name, empId, desig)
@@ -16,6 +16,6 @@ class Employee
   end
 
   def sort_employees
-    @@hash[@desig] << "#{ @name } (EmpId: #{ @empId })"
+    @@employees_by_designation[@desig] << "#{ @name } (EmpId: #{ @empId })"
   end
 end
