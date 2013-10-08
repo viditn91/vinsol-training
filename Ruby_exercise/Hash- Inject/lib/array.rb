@@ -9,7 +9,7 @@ class Array
   
   def to_groupedHash(hash)
     hash.inject(Hash.new{ |h, k| h[k] = [] }) do |h, (key, value)|
-      key.even? ? h["even"] << value : h["odd"] << value 
+      h[key.even? ? "even" : "odd"] << value 
       h
     end
   end
