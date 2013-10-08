@@ -4,5 +4,5 @@ principal = gets.chomp
 puts "enter time period_"
 time = gets.chomp
 rate = 10
-interests = Interest.new.tap { |a| a.p, a.t, a.r = principal.to_i, time.to_i, rate.to_f }
+interests = Interest.new { [principal.to_i, time.to_i, rate.to_f] }
 p interests.get_difference
