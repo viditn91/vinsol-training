@@ -1,7 +1,7 @@
 require 'date'
 require_relative 'period.rb'
 
-class SeasonalRate
+module SeasonalRate
   
   def self.cal_seasonal_rate(hotel)
     output = {}

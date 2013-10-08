@@ -1,5 +1,5 @@
 module Period
-
+  
   def self.no_of_days
     RANGE.to_a.size
   end

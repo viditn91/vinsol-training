@@ -1,14 +1,13 @@
 require_relative 'period'
 
-class NormalRate
+module NormalRate
   
-  def self.cal_normal_rate(hotel)
-    days = Period.no_of_days
+  def self.cal_normal_rate(hotel, seasonal_days)
+    normal_days = Period.no_of_days - seasonal_days
     output = { 
-      "days" => days, 
+      "days" => normal_days, 
       "rate" => hotel.rate, 
-      "price" => hotel.rate * days,
-      "tax" => hotel.rate * days * hotel.tax / 100 
+      "price" => hotel.rate * normal_days,
     }
   end
 
