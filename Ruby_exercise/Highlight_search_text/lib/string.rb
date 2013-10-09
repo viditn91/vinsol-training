@@ -1,7 +1,7 @@
 class String
-  def highlight_search
-  	p gsub(/(can)/i, '(\1)')
-  	occurences = scan(/(can)/i).size
-  	"Total occurence found: #{occurences}"
+  def highlight_search(string)
+  	regexp = /#{ string }/i
+  	gsub!(regexp, '(\0)')
+  	scan(regexp).size
   end
 end
