@@ -3,6 +3,5 @@ puts "enter principal_"
 principal = gets.chomp
 puts "enter time period_"
 time = gets.chomp
-rate = 10
-interests = Interest.new { [principal.to_i, time.to_i, rate.to_f] }
-p interests.get_difference
+interests = Interest.new { [principal.to_i, time.to_i ] }
+p "The difference between Simple and Compound Interest is #{ interests.get_difference }"
