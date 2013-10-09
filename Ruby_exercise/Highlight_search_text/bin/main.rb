@@ -1,5 +1,9 @@
 require_relative '../lib/string.rb'
-newString = String.new("Can you can a can as a canner can can a can")
-occurences = newString.highlight_search('can')
-p newString
+
+puts "enter a string_"
+inputString = gets.chomp
+puts "enter pattern to search_"
+pattern = gets.chomp
+occurences = inputString.highlight_search(pattern)
+p inputString
 p "Total occurence found: #{occurences}"

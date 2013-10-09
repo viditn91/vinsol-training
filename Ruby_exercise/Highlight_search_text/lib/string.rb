@@ -1,11 +1,11 @@
 class String
   def highlight_search(string)
-    regexp = /#{ string }/i
-    count = 0
-    gsub!(regexp) do |m| 
-      count += 1
-      "(#{ m })" 
+    pattern = /#{ string }/i
+    occurences = 0
+    gsub!(pattern) do |match| 
+      occurences += 1
+      "(#{ match })" 
     end
-  count
+  occurences
   end
 end
