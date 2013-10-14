@@ -1,4 +1,4 @@
-class String
+class StrTime
   def initialize(*strings)
     @strings = strings
     @md = match
@@ -34,10 +34,11 @@ class String
   end
 
   def display_time(secs, mins, hours, days)
+    timeString = "#{ (hours % 24).to_s.rjust(2,'0') }:#{ (mins % 60).to_s.rjust(2,'0') }:#{ (secs % 60).to_s.rjust(2,'0') }"
     if days > 0
-      "#{ days } Days & #{ (hours % 24).to_s.rjust(2,'0') }:#{ (mins % 60).to_s.rjust(2,'0') }:#{ (secs % 60).to_s.rjust(2,'0') }"
+      "#{ days } Days & " + timeString
     else
-      "#{ (hours % 24).to_s.rjust(2,'0') }:#{ (mins % 60).to_s.rjust(2,'0') }:#{ (secs % 60).to_s.rjust(2,'0') }"
+      timeString
     end
   end
 end
